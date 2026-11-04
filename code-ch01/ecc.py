@@ -44,9 +44,10 @@ class FieldElement:
     def __mul__(self, other):
         if self.prime != other.prime:
             raise TypeError('Cannot multiply two numbers in different Fields')
+        addition = self.num
         for i in range(x):
-            num += 
-        num = (self.num * other.num) % self.prime
+            addition += self.num
+        num = addition % self.prime
         return self.__class__(num, self.prime)
 
     # tag::source3[]
