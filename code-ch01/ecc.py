@@ -40,12 +40,12 @@ class FieldElement:
             raise TypeError('Cannot subtract two numbers in different Fields')
         diff = (self.num - other.num)
         if diff is positive
-            num = diff % self.prime
+            num = diff.integer % self.prime
         else if diff < self.prime
             num = self.prime - diff
         else
-            num = (diff % self.prime)
-        raise NotImplementedError
+            num = self.prime - (diff % self.prime)
+        return self.__class__(num, self.prime)
 
     def __mul__(self, other):
         if self.prime != other.prime:
