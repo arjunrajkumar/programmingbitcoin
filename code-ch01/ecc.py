@@ -45,7 +45,7 @@ class FieldElement:
         if self.prime != other.prime:
             raise TypeError('Cannot multiply two numbers in different Fields')
         addition = self.num
-        for i in range(x):
+        for i in range(other.num):
             addition += self.num
         num = addition % self.prime
         return self.__class__(num, self.prime)
