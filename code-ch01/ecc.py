@@ -44,10 +44,8 @@ class FieldElement:
     def __mul__(self, other):
         if self.prime != other.prime:
             raise TypeError('Cannot multiply two numbers in different Fields')
-        num = (self.num - other.num) % self.prime
+        num = (self.num * other.num) % self.prime
         return self.__class__(num, self.prime)
-
-        raise NotImplementedError
 
     # tag::source3[]
     def __pow__(self, exponent):
