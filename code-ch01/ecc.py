@@ -63,8 +63,9 @@ class FieldElement:
         if other.num == 0:
             raise ZeroDivisionError('Cannot divide by zero')
 
-
-        num = (self.num * pow(other, other.prime-2, other.prime)) % p
+      
+    
+        num = (self.num * pow(other, other.prime - 2, other.prime)) % p
         return self.__class__(num, self.prime)
 
 class FieldElementTest(TestCase):
