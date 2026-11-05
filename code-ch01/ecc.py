@@ -65,8 +65,8 @@ class FieldElement:
         # this means:
         # 1/n == pow(n, p-2, p)
         # We return an element of the same class
-        raise NotImplementedError
-
+        
+        self ** pow(n, p-2, p)
 
 class FieldElementTest(TestCase):
 
