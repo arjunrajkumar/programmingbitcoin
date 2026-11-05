@@ -60,13 +60,14 @@ class FieldElement:
     def __truediv__(self, other):
         if self.prime != other.prime:
             raise TypeError('Cannot divide two numbers in different Fields')
-        # use fermat's little theorem:
-        # self.num**(p-1) % p == 1
-        # this means:
-        # 1/n == pow(n, p-2, p)
-        # We return an element of the same class
-        
-        num = self ** pow(other, other.prime-2, other.prime)
+        if other.num == 0:
+            raise ZeroDivisionError('Cannot divide by zero')
+
+        p = self.prime
+        num = (self.num * pow(other.num, p - 2, p)) % p
+        return self.__class__(num, p)
+    
+        num = self * pow(other, other.prime-2, other.prime)
         return self.__class__(num, self.prime)
 
 class FieldElementTest(TestCase):
