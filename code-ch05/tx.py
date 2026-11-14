@@ -139,7 +139,7 @@ class Tx:
         # fee is input sum - output sum
         input_sum, output_sum = 0, 0
         for tx_in in self.tx_ins:
-            input_sum += tx_in.value(testnet=testnet)
+            input_sum += tx_in.value(testnet=self.testnet)
         for tx_out in self.tx_outs:
             output_sum += tx_out.amount
         return input_sum - output_sum
