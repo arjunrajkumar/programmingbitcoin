@@ -220,8 +220,7 @@ class TxOut:
         # amount is an integer in 8 bytes, little endian
         # use Script.parse to get the ScriptPubKey
         # return an instance of the class (see __init__ for args)
-        version = little_endian_to_int(s.read(4))
-        return cls(version, None, None, None, testnet=testnet)
+        raise NotImplementedError
 
     # tag::source4[]
     def serialize(self):  # <1>
