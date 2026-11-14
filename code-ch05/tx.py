@@ -111,6 +111,7 @@ class Tx:
         for _ in range(num_inputs):
             inputs.append(TxIn.parse(s))
         outputs = []
+        num_outputs = read_varint(s)
         for _ in range(num_outputs):
             outputs.append(TxOut.parse(s))
         return cls(version, inputs, outputs, None, testnet=testnet)
