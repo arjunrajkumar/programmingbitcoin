@@ -220,14 +220,8 @@ class TxOut:
         # amount is an integer in 8 bytes, little endian
         # use Script.parse to get the ScriptPubKey
         # return an instance of the class (see __init__ for args)
-        # end::exercise1[]
-# tag::answer1[]
-    @classmethod
-    def parse(cls, s, testnet=False):
         version = little_endian_to_int(s.read(4))
         return cls(version, None, None, None, testnet=testnet)
-# end::answer1[]
-# tag::exercise2[]
 
     # tag::source4[]
     def serialize(self):  # <1>
