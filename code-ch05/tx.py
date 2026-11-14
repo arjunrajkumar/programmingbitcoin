@@ -105,17 +105,18 @@ class Tx:
 
     @classmethod
     def parse(cls, s, testnet=False):
+        '''Takes a byte stream and parses the transaction at the start
+        return a Tx object
+        '''
+       
+        # num_inputs is a varint, use read_varint(s)
+        # parse num_inputs number of TxIns
+        # num_outputs is a varint, use read_varint(s)
+        # parse num_outputs number of TxOuts
+        # locktime is an integer in 4 bytes, little-endian
+        # return an instance of the class (see __init__ for args)
         version = little_endian_to_int(s.read(4))
-        num_inputs = read_varint(s)
-        inputs = []
-        for _ in range(num_inputs):
-            inputs.append(TxIn.parse(s))
-        num_outputs = read_varint(s)
-        outputs = []
-        for _ in range(num_outputs):
-            outputs.append(TxOut.parse(s))
-        locktime = little_endian_to_int(s.read(4))
-        return cls(version, inputs, None, locktime, testnet=testnet)
+        return cls(version, None, None, None, testnet=testnet)
 
     # tag::source6[]
     def serialize(self):
