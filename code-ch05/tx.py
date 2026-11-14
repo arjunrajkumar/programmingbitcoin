@@ -110,7 +110,10 @@ class Tx:
         inputs = []
         for _ in range(num_inputs):
             inputs.append(TxIn.parse(s))
-        return cls(version, inputs, None, None, testnet=testnet)
+        outputs = []
+        for _ in range(num_outputs):
+            outputs.append(TxOut.parse(s))
+        return cls(version, inputs, outputs, None, testnet=testnet)
 
     # tag::source6[]
     def serialize(self):
