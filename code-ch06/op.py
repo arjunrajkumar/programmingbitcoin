@@ -669,7 +669,11 @@ def op_checksig(stack, z):
     # parse the serialized pubkey and signature into objects
     # verify the signature using S256Point.verify()
     # push an encoded 1 or 0 depending on whether the signature verified
-    raise NotImplementedError
+    if len(stack) < 2:
+        return False
+    element = stack.pop()
+    stack.append(hash256(element))
+    return True
 
 
 def op_checksigverify(stack, z):
