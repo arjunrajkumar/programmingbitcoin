@@ -220,7 +220,7 @@ class Tx:
         else:
             redeem_script = None
         
-        z = self.sig_hash(input_index)
+        z = self.sig_hash(input_index, redeem_script)
         # combine the current ScriptSig and the previous ScriptPubKey
         combined = tx_in.script_sig + script_pubkey
         # evaluate the combined script
