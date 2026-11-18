@@ -213,6 +213,13 @@ class Tx:
         # otherwise RedeemScript is None
         # get the signature hash (z)
         # pass the RedeemScript to the sig_hash method
+        if script_pubkey.is_p2sh_script_pubkey():
+            cmd = tx_in.script_sig.cmds[-1]
+            raw_redeem = encode_varint(len(cmd)) + cmd
+            redeem_script = Script.parse(BytesIO(raw_redeem))
+        else:
+            redeem_script = None
+        
         z = self.sig_hash(input_index)
         # combine the current ScriptSig and the previous ScriptPubKey
         combined = tx_in.script_sig + script_pubkey
