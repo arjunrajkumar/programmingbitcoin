@@ -65,7 +65,7 @@ class Block:
 
     def target(self):
         '''Returns the proof-of-work target based on the bits'''
-        return 0x13ce9000000000000000000000000000000000000000000
+        return bits_to_target(self.bits)
 
     def difficulty(self):
         '''Returns the block difficulty based on the bits'''
