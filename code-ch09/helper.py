@@ -129,8 +129,8 @@ def bits_to_target(bits):
     # the first three bytes are the coefficient in little endian
     # the formula is:
     # coefficient * 256**(exponent-3)
-    coefficient = little_endian_to_int(bits[:-1])
     exponent = bits[-1]
+    coefficient = little_endian_to_int(bits[:-1])
     return coefficient * 256**(exponent - 3)
 
 
