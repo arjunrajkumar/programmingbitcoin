@@ -73,11 +73,9 @@ class Block:
         return (0xffff * 256**(0x1d-3) / self.target())
 
     def check_pow(self):
-        '''Returns whether this block satisfies proof of work'''
-        # get the hash256 of the serialization of this block
-        # interpret this hash as a little-endian number
-        # return whether this integer is less than the target
-        raise NotImplementedError
+        sha = hash256(self.serialize())
+        proof = little_endian_to_int(sha)
+        return proof < self.target()
 
 
 class BlockTest(TestCase):
