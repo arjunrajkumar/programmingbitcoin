@@ -64,7 +64,6 @@ class Block:
         return self.version >> 1 & 1 == 1
 
     def target(self):
-        '''Returns the proof-of-work target based on the bits'''
         return bits_to_target(self.bits)
 
     def difficulty(self):
