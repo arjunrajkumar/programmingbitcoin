@@ -70,7 +70,7 @@ class Block:
         '''Returns the block difficulty based on the bits'''
         # note difficulty is (target of lowest difficulty) / (self's target)
         # lowest difficulty has bits that equal 0xffff001d
-        return (0xffff * 256**(0x1d-3) / self.target()
+        return (0xffff * 256**(0x1d-3) / self.target())
 
     def check_pow(self):
         '''Returns whether this block satisfies proof of work'''
