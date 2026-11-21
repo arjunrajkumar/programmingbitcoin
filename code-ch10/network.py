@@ -37,27 +37,26 @@ class NetworkEnvelope:
         )
     # end::source1[]
 
-    @classmethod
     def parse(cls, s, testnet=False):
-        '''Takes a stream and creates a NetworkEnvelope'''
-        # check the network magic
         magic = s.read(4)
         if magic == b'':
-            raise RuntimeError('Connection reset!')
+            raise IOError('Connection reset!')
         if testnet:
             expected_magic = TESTNET_NETWORK_MAGIC
         else:
             expected_magic = NETWORK_MAGIC
         if magic != expected_magic:
-            raise RuntimeError('magic is not right {} vs {}'.format(magic.hex(), expected_magic.hex()))
-        # command 12 bytes
-        # strip the trailing 0's
-        # payload length 4 bytes, little endian
-        # checksum 4 bytes, first four of hash256 of payload
-        # payload is of length payload_length
-        # verify checksum
-        # return an instance of the class
-        raise NotImplementedError
+            raise SyntaxError('magic is not right {} vs {}'.format(magic.hex(), 
+              expected_magic.hex()))
+        command = s.read(12)
+        command = command.strip(b'\x00')
+        payload_length = little_endian_to_int(s.read(4))
+        checksum = s.read(4)
+        payload = s.read(payload_length)
+        calculated_checksum = hash256(payload)[:4]
+        if calculated_checksum != checksum:
+            raise IOError('checksum does not match')
+        return cls(command, payload, testnet=testnet)
 
     def serialize(self):
         '''Returns the byte serialization of the entire network message'''
