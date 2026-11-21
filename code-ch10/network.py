@@ -59,14 +59,12 @@ class NetworkEnvelope:
         return cls(command, payload, testnet=testnet)
 
     def serialize(self):
-        '''Returns the byte serialization of the entire network message'''
-        # add the network magic
-        # command 12 bytes
-        # fill with 0's
-        # payload length 4 bytes, little endian
-        # checksum 4 bytes, first four of hash256 of payload
-        # payload
-        raise NotImplementedError
+        result = self.magic
+        result += self.command + b'\x00' * (12 - len(self.command))
+        result += int_to_little_endian(len(self.payload), 4)
+        result += hash256(self.payload)[:4]
+        result += self.payload
+        return result
 
     def stream(self):
         '''Returns a stream for parsing the payload'''
