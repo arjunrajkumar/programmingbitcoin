@@ -36,7 +36,7 @@ class NetworkEnvelope:
             self.payload.hex(),
         )
     # end::source1[]
-
+    @classmethod
     def parse(cls, s, testnet=False):
         magic = s.read(4)
         if magic == b'':
