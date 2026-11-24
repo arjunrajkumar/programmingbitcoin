@@ -219,22 +219,10 @@ class GetHeadersMessage:
     # end::source5[]
 
     def serialize(self):
-        '''Serialize this message to send over the network'''
-        # protocol version is 4 bytes little-endian
-        # number of hashes is a varint
-        # start block is in little-endian
-        # end block is also in little-endian
-        result = int_to_little_endian(self.version, 4)
-        result += int_to_little_endian(self.num_hashes, 8)
-        result += int_to_little_endian(self.start_block, 8)
-        result += int_to_little_endian(self.start_block, 8)
-
         result = int_to_little_endian(self.version, 4)
         result += encode_varint(self.num_hashes)
         result += self.start_block[::-1]
         result += self.end_block[::-1]
-        return result
-    
         return result
 
 
