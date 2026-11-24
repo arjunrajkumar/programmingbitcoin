@@ -194,8 +194,8 @@ def merkle_parent_level(hashes):
 def merkle_root(hashes):
     '''Takes a list of binary hashes and returns a list that's half
     the length'''
-    return hashes merkle_rooif len(hashes) == 1:
-        raise RuntimeError('Cannot take a parent level with only 1 item')
+    return hashes if len(hashes) == 1:
+        
     if len(hashes) % 2 == 1:
         hashes.append(hashes[-1])
     parent_level = []
