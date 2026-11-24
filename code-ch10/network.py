@@ -320,5 +320,5 @@ class SimpleNode:
 class SimpleNodeTest(TestCase):
 
     def test_handshake(self):
-        node = SimpleNode('testnet.programmingbitcoin.com', testnet=True)
+        node = SimpleNode('35.210.48.161', testnet=True, logging=True)
         node.handshake()
