@@ -196,7 +196,7 @@ class MerkleBlock:
         # length of flags field - varint
         # read the flags field
         # initialize class
-        raise NotImplementedError
+        
 
     def is_valid(self):
         '''Verifies whether the merkle tree information validates to the merkle root'''
